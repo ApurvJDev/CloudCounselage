@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505897165484",
+    "project_id": "cloud-counselage-connect",
+    "storage_bucket": "cloud-counselage-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505897165484:android:61295f79990a9484bb3509",
+        "android_client_info": {
+          "package_name": "com.example.cloudcounselageconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505897165484-k2ml6nqnk8mahp98ppi7iemsgo8s7qtd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBguqLVMFFkKMFw6Fgt0x5FTsUQuFk91cw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505897165484-k2ml6nqnk8mahp98ppi7iemsgo8s7qtd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
