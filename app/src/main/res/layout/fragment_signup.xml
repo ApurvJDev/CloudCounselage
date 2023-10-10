@@ -7,99 +7,137 @@
     tools:context=".SignupFragment"
     android:id="@+id/SignupFragment">
 
-       <androidx.cardview.widget.CardView
-           android:layout_width="wrap_content"
-           android:layout_height="350dp"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           app:cardCornerRadius="20dp"
-           app:cardElevation="20dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-           <androidx.constraintlayout.widget.ConstraintLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-               <EditText
-                   android:id="@+id/edtUsername"
-                   android:layout_width="250dp"
-                   android:layout_height="wrap_content"
-                   android:background="@drawable/txt_bg"
-                   android:hint="Username"
-                   android:layout_margin="20dp"
-                   android:padding="10dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:layout_constraintVertical_bias="0" />
+            <EditText
+                android:id="@+id/edtUsername"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/txt_bg"
+                android:hint="Username"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
 
 
-               <EditText
-                   android:id="@+id/edtSignupEmail"
-                   android:layout_width="250dp"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="20dp"
-                   android:background="@drawable/txt_bg"
-                   android:hint="Email"
-                   android:padding="10dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintEnd_toEndOf="@id/edtUsername"
-                   app:layout_constraintStart_toStartOf="@id/edtUsername"
-                   app:layout_constraintTop_toBottomOf="@id/edtUsername"
-                   app:layout_constraintVertical_bias="0" />
+            <EditText
+                android:id="@+id/edtSignupEmail"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/txt_bg"
+                android:hint="Email"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/edtUsername"
+                app:layout_constraintStart_toStartOf="@id/edtUsername"
+                app:layout_constraintTop_toBottomOf="@id/edtUsername"
+                app:layout_constraintVertical_bias="0" />
 
-               <EditText
-                   android:id="@+id/edtSignupPass"
-                   android:layout_width="250dp"
-                   android:layout_height="wrap_content"
-                   android:hint="Password"
-                   android:inputType="numberPassword"
-                   android:padding="10dp"
-                   android:background="@drawable/txt_bg"
-                   android:layout_margin="20dp"
-                   app:layout_constraintVertical_bias="0"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintEnd_toEndOf="@+id/edtSignupEmail"
-                   app:layout_constraintStart_toStartOf="@+id/edtSignupEmail"
-                   app:layout_constraintTop_toBottomOf="@+id/edtSignupEmail" />
+            <EditText
+                android:id="@+id/edtSignupPass"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/txt_bg"
+                android:hint="Password"
+                android:inputType="numberPassword"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/edtSignupEmail"
+                app:layout_constraintStart_toStartOf="@+id/edtSignupEmail"
+                app:layout_constraintTop_toBottomOf="@+id/edtSignupEmail"
+                app:layout_constraintVertical_bias="0" />
 
-               <EditText
-                   android:id="@+id/edtSignupConfirmPass"
-                   android:layout_width="250dp"
-                   android:layout_height="wrap_content"
-                   android:hint="Confirm Password"
-                   android:inputType="numberPassword"
-                   android:padding="10dp"
-                   android:background="@drawable/txt_bg"
-                   android:layout_margin="20dp"
-                   app:layout_constraintVertical_bias="0"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintEnd_toEndOf="@+id/edtSignupPass"
-                   app:layout_constraintStart_toStartOf="@+id/edtSignupPass"
-                   app:layout_constraintTop_toBottomOf="@+id/edtSignupPass" />
+            <EditText
+                android:id="@+id/edtSignupConfirmPass"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/txt_bg"
+                android:hint="Confirm Password"
+                android:inputType="numberPassword"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/edtSignupPass"
+                app:layout_constraintStart_toStartOf="@+id/edtSignupPass"
+                app:layout_constraintTop_toBottomOf="@+id/edtSignupPass"
+                app:layout_constraintVertical_bias="0" />
 
-               <Button
-                   android:id="@+id/btnSignup"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Signup"
-                   android:textColor="@color/white"
-                   android:layout_margin="20dp"
-                   app:layout_constraintVertical_bias="0"
-                   android:layout_marginBottom="10dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintEnd_toEndOf="@+id/edtSignupConfirmPass"
-                   app:layout_constraintStart_toStartOf="@+id/edtSignupConfirmPass"
-                   app:layout_constraintTop_toBottomOf="@+id/edtSignupConfirmPass" />
+            <Button
+                android:id="@+id/btnSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Signup"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/edtSignupConfirmPass"
+                app:layout_constraintStart_toStartOf="@+id/edtSignupConfirmPass"
+                app:layout_constraintTop_toBottomOf="@+id/edtSignupConfirmPass"
+                app:layout_constraintVertical_bias="0" />
 
-           </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-       </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/ivFacebookRegister"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/logo_facebook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        android:contentDescription="@string/facebook_register" />
+
+    <ImageView
+        android:id="@+id/ivTwitterRegister"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/logo_twitter"
+        app:layout_constraintBottom_toBottomOf="@+id/ivFacebookRegister"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/ivFacebookRegister"
+        android:contentDescription="@string/twitter_register" />
+
+    <ImageView
+        android:id="@+id/ivMicrosoftRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_ms"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintBottom_toBottomOf="@+id/ivTwitterRegister"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/ivTwitterRegister"
+        android:contentDescription="@string/microsoft_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
