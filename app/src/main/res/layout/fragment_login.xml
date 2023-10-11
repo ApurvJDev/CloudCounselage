@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="290dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,45 +28,50 @@
             <EditText
                 android:id="@+id/edtLoginEmail"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:inputType="textEmailAddress"
                 android:background="@drawable/txt_bg"
-                android:hint="Email"
+                android:hint="@string/email_login"
                 android:padding="10dp"
                 app:layout_constraintVertical_bias="0"
                 android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:autofillHints="Email" />
 
             <EditText
                 android:id="@+id/edtLoginUsername"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:inputType="text"
                 android:background="@drawable/txt_bg"
-                android:hint="Username"
+                android:hint="@string/username_login"
                 android:padding="10dp"
                 app:layout_constraintVertical_bias="0"
                 android:layout_margin="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/edtLoginEmail"
                 app:layout_constraintStart_toStartOf="@+id/edtLoginEmail"
-                app:layout_constraintTop_toBottomOf="@+id/edtLoginEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/edtLoginEmail"
+                android:autofillHints="Username" />
 
             <EditText
                 android:id="@+id/edtLoginPass"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_margin="20dp"
                 android:background="@drawable/txt_bg"
-                android:hint="Password"
-                android:inputType="numberPassword"
+                android:hint="@string/password_login"
+                android:inputType="textPassword"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/edtLoginUsername"
                 app:layout_constraintStart_toStartOf="@+id/edtLoginUsername"
                 app:layout_constraintTop_toBottomOf="@+id/edtLoginUsername"
-                app:layout_constraintVertical_bias="0" />
+                app:layout_constraintVertical_bias="0"
+                android:autofillHints="Password" />
 
             <Button
                 android:id="@+id/btnLogin"
@@ -74,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="Login"
+                android:text="@string/login"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/edtLoginPass"
@@ -85,8 +90,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

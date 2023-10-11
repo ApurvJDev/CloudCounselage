@@ -31,10 +31,8 @@ public class onBoardingFragment4 extends Fragment {
         super.onStart();
 
         getStarted = context.findViewById(R.id.btn_getStarted);
-
         getStarted.setOnClickListener(v -> {
 
-//                getStarted.setVisibility(View.GONE);
             Intent intent = new Intent(context,AuthActivity.class);
             startActivity(intent);
         });
