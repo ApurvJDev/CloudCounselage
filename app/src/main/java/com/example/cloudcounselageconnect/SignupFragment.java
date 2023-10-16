@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +21,7 @@ import java.util.Objects;
 
 public class SignupFragment extends Fragment {
     Button signup;
+    ImageView ivFacebookRegister, ivTwitterRegister, ivMicrosoftRegister;
     EditText edtUsername, edtSignupEmail,edtSignupPass,edtSignupConfirmPass;
     FirebaseAuth mAuth;
     FirebaseFirestore db  = FirebaseFirestore.getInstance();
@@ -31,6 +35,7 @@ public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_signup, container, false);
 
@@ -41,7 +46,7 @@ public class SignupFragment extends Fragment {
         edtSignupEmail = root.findViewById(R.id.edtSignupEmail);
         edtSignupPass = root.findViewById(R.id.edtSignupPass);
         edtSignupConfirmPass = root.findViewById(R.id.edtSignupConfirmPass);
-
+//        ivFacebookRegister = root.findViewById(R.id.ivFacebookRegister);
 
         AuthActivity authActivity = (AuthActivity) getActivity();
         assert authActivity != null;
@@ -61,7 +66,7 @@ public class SignupFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(getActivity(), "Authentication failed"+ Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(getActivity(), "Authentication failed "+ Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }).addOnSuccessListener(authResult -> {
@@ -90,6 +95,8 @@ public class SignupFragment extends Fragment {
         });
         return root;
     }
+
+
     public boolean checkEmail(String email) {
         //email field empty
         if(email.equals("")) {
@@ -121,6 +128,5 @@ public class SignupFragment extends Fragment {
         }
         return true;
     }
-
 }
 

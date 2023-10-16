@@ -18,4 +18,10 @@
     <string name="username_login">Username</string>
     <string name="password_login">Password</string>
     <string name="login">Login</string>
+    <string name="welcome">Welcome to Cloud Counselage Connect+</string>
+    <string name="facebook_app_id">1234</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
+
 </resources>

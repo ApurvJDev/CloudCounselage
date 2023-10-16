@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     ImageButton btnLogout;
     FirebaseAuth mAuth;
     EditText edtSendMsg;
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //scroll rv to newly added message
                 recyclerView.smoothScrollToPosition(msgModelArrayList.size() - 1);
-            }, 2000);
+            }, 1000);
         });
         //LOGOUT
         btnLogout.setOnClickListener(v -> {
