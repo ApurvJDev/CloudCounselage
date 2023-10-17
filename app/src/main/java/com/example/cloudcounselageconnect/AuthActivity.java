@@ -22,6 +22,9 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -40,13 +43,13 @@ public class AuthActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // below line gets done automatically
-//        FacebookSdk.sdkInitialize(getApplicationContext());
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         // Initialize Facebook Login button
 
         mCallbackManager = CallbackManager.Factory.create();
         logbtnFacebook = findViewById(R.id.logbtnFacebook);
-        logbtnFacebook.setReadPermissions("email", "public_profile");
+        //logbtnFacebook.setReadPermissions("email", "public_profile");
 
         logbtnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -63,12 +66,7 @@ public class AuthActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onError", error);
             }
         });
-//        user = mAuth.getCurrentUser();
-//        if(user != null) {
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager);
