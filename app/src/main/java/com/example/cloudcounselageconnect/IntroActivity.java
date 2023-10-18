@@ -24,6 +24,7 @@ public class IntroActivity extends AppCompatActivity {
         // initialize firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+
         ViewPager2 viewPager2 = findViewById(R.id.pager);
 
         FragmentStateAdapter pagerAdapter = new ScreenSlidePagerAdapter(this);
@@ -33,19 +34,15 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         // check if user is signed in
         user = mAuth.getCurrentUser();
-
         // if user signed in we update UI accordingly
         Intent intent;
         if(user != null) {
             intent = new Intent(this, MainActivity.class);
-        }else {
-            intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
+            finish();
         }
-        startActivity(intent);
-        finish();
     }
 
     private static class ScreenSlidePagerAdapter extends FragmentStateAdapter {

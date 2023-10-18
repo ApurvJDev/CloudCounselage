@@ -10,6 +10,9 @@ import android.os.Handler;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.facebook.CallbackManager;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<msgModel> msgModelArrayList;
     boolean isWaitingForResponse;
     msgAdapter msgsAdapter;
+    CallbackManager mCallBackManager;
 
     @SuppressLint({"MissingInflatedId", "NotifyDataSetChanged"})
     @Override
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mCallBackManager = CallbackManager.Factory.create();
 
         btnLogout = findViewById(R.id.btnLogout);
         edtSendMsg = findViewById(R.id.edtSendMsg);
@@ -74,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         });
         //LOGOUT
         btnLogout.setOnClickListener(v -> {
+
             mAuth.signOut();
+            LoginManager.getInstance().logOut();
             Intent intent = new Intent(MainActivity.this,AuthActivity.class);
             startActivity(intent);
             finish();

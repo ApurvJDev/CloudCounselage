@@ -12,10 +12,8 @@ import com.airbnb.lottie.LottieAnimationView;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity{
-
     ImageView logo;
     LottieAnimationView lottie;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +27,9 @@ public class SplashScreen extends AppCompatActivity{
         lottie.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
 
         Intent intent = new Intent(SplashScreen.this,IntroActivity.class);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(intent);
-                finish();
-            }
-        },5000);
+        new Handler().postDelayed(() -> {
+            startActivity(intent);
+            finish();
+        },4000);
     }
 }

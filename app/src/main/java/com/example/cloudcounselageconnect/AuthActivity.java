@@ -2,11 +2,16 @@ package com.example.cloudcounselageconnect;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ProviderInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -15,6 +20,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.material.tabs.TabLayout;
@@ -24,17 +30,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class AuthActivity extends AppCompatActivity {
-
     FirebaseAuth mAuth;
     FirebaseUser user;
+    FirebaseFirestore db;
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
     LoginButton logbtnFacebook;
+    ImageView ivFacebookRegister, ivTwitterRegister, ivMicrosoftRegister;
     CallbackManager mCallbackManager;
+    public static final String USER = "Users";
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +62,32 @@ public class AuthActivity extends AppCompatActivity {
 
         mCallbackManager = CallbackManager.Factory.create();
         logbtnFacebook = findViewById(R.id.logbtnFacebook);
+        ivFacebookRegister = findViewById(R.id.ivFacebookRegister);
         //logbtnFacebook.setReadPermissions("email", "public_profile");
+        logbtnFacebook.setPermissions("email","public_profile");
 
+        // facebook login
+        ivFacebookRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logInWithReadPermissions(AuthActivity.this , Arrays.asList("email", "username"));
+                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "facebook:onCancel");
+                    }
+                    @Override
+                    public void onError(@NonNull FacebookException error) {
+                        Log.d(TAG, "facebook:onError", error);
+                    }
+                });
+            }
+        });
         logbtnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -62,12 +99,10 @@ public class AuthActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onCancel");
             }
             @Override
-            public void onError(FacebookException error) {
+            public void onError(@NonNull FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
             }
         });
-
-
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager);
 
@@ -104,12 +139,27 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        user = mAuth.getCurrentUser();
+        if(user != null) {
+            Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+//        SignupFragment signupFragment = (SignupFragment) getSupportFragmentManager().findFragmentById(R.id.SignupFragment);
 
         // Pass the activity result back to the Facebook SDK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
         Log.d(TAG, "handleFacebookAccessToken:" + accessToken);
@@ -120,7 +170,30 @@ public class AuthActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
+
                         user = mAuth.getCurrentUser();
+                        // adding facebook credentials in firebase database
+                        //String email = user.getEmail();
+                        String username = user.getDisplayName();
+                        String email = username + "@gmail.com";
+                        email.toLowerCase().trim();
+
+                        HelperClass usr = new HelperClass();
+                        db = FirebaseFirestore.getInstance();
+
+                        usr.setEmail(email);
+                        usr.setUsername(username);
+
+                        db.collection(USER).document(email).set(usr).
+                                addOnSuccessListener(unused -> Toast.makeText(AuthActivity.this, "User added!",
+                                        Toast.LENGTH_SHORT).show()).
+                                addOnFailureListener(e -> Toast.makeText(AuthActivity.this, e.toString(),
+                                        Toast.LENGTH_SHORT).show());
+                        Log.d("Test", "Sign Up successful");
+                        Toast.makeText(AuthActivity.this, "Sign Up successful", Toast.LENGTH_SHORT).show();
+
+                        // changing activity
+
                         if(user != null) {
                             Intent intent = new Intent(AuthActivity.this, MainActivity.class);
                             startActivity(intent);

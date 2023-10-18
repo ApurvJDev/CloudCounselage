@@ -109,41 +109,41 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/ivFacebookRegister"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/logo_facebook"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        android:contentDescription="@string/facebook_register" />
+<!--    <ImageView-->
+<!--        android:id="@+id/ivFacebookRegister"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:src="@drawable/logo_facebook"-->
+<!--        app:layout_constraintHorizontal_bias="0"-->
+<!--        app:layout_constraintVertical_bias="0"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/cardView2"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/cardView2"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/cardView2"-->
+<!--        android:contentDescription="@string/facebook_register" />-->
 
-    <ImageView
-        android:id="@+id/ivTwitterRegister"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/logo_twitter"
-        app:layout_constraintBottom_toBottomOf="@+id/ivFacebookRegister"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="@+id/ivFacebookRegister"
-        android:contentDescription="@string/twitter_register" />
+<!--    <ImageView-->
+<!--        android:id="@+id/ivTwitterRegister"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:src="@drawable/logo_twitter"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/ivFacebookRegister"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/cardView2"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/cardView2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/ivFacebookRegister"-->
+<!--        android:contentDescription="@string/twitter_register" />-->
 
-    <ImageView
-        android:id="@+id/ivMicrosoftRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_ms"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintBottom_toBottomOf="@+id/ivTwitterRegister"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="@+id/ivTwitterRegister"
-        android:contentDescription="@string/microsoft_register" />
+<!--    <ImageView-->
+<!--        android:id="@+id/ivMicrosoftRegister"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/logo_ms"-->
+<!--        app:layout_constraintHorizontal_bias="1"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/ivTwitterRegister"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/cardView2"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/cardView2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/ivTwitterRegister"-->
+<!--        android:contentDescription="@string/microsoft_register" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

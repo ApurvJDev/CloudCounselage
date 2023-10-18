@@ -40,13 +40,55 @@
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         app:layout_constraintVertical_bias="0" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/logbtnFacebook"
+    <ImageView
+        android:id="@+id/ivFacebookRegister"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/facebook_register"
+        android:src="@drawable/logo_facebook"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/viewPager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+    <ImageView
+        android:id="@+id/ivTwitterRegister"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/twitter_register"
+        android:src="@drawable/logo_twitter"
+        app:layout_constraintBottom_toBottomOf="@+id/ivFacebookRegister"
+        app:layout_constraintEnd_toEndOf="@+id/viewPager"
+        app:layout_constraintStart_toStartOf="@+id/viewPager"
+        app:layout_constraintTop_toTopOf="@+id/ivFacebookRegister" />
+
+    <ImageView
+        android:id="@+id/ivMicrosoftRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:contentDescription="@string/microsoft_register"
+        android:src="@drawable/logo_ms"
+        app:layout_constraintBottom_toBottomOf="@+id/ivTwitterRegister"
+        app:layout_constraintEnd_toEndOf="@+id/viewPager"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="@+id/viewPager"
+        app:layout_constraintTop_toTopOf="@+id/ivTwitterRegister" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/logbtnFacebook"
+        android:layout_width="40dp"
+        android:alpha="0"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
