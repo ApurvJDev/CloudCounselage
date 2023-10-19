@@ -23,13 +23,18 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -58,36 +63,124 @@ public class AuthActivity extends AppCompatActivity {
         // below line gets done automatically
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-        // Initialize Facebook Login button
+        // twitter
+        OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");
+        // Localize to French.
+        provider.addCustomParameter("lang", "en");
 
         mCallbackManager = CallbackManager.Factory.create();
         logbtnFacebook = findViewById(R.id.logbtnFacebook);
         ivFacebookRegister = findViewById(R.id.ivFacebookRegister);
+        ivTwitterRegister = findViewById(R.id.ivTwitterRegister);
         //logbtnFacebook.setReadPermissions("email", "public_profile");
         logbtnFacebook.setPermissions("email","public_profile");
 
-        // facebook login
-        ivFacebookRegister.setOnClickListener(new View.OnClickListener() {
+        // twitter login
+        ivTwitterRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(AuthActivity.this , Arrays.asList("email", "username"));
-                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
-                    @Override
-                    public void onCancel() {
-                        Log.d(TAG, "facebook:onCancel");
-                    }
-                    @Override
-                    public void onError(@NonNull FacebookException error) {
-                        Log.d(TAG, "facebook:onError", error);
-                    }
-                });
+                Task<AuthResult> pendingResultTask = mAuth.getPendingAuthResult();
+                if (pendingResultTask != null) {
+                    // There's something already here! Finish the sign-in for your user.
+                    pendingResultTask
+                            .addOnSuccessListener(
+                                    new OnSuccessListener<AuthResult>() {
+                                        @Override
+                                        public void onSuccess(AuthResult authResult) {
+                                            // User is signed in.
+                                            // IdP data available in
+                                            // authResult.getAdditionalUserInfo().getProfile().
+                                            // The OAuth access token can also be retrieved:
+                                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                                            // The OAuth secret can be retrieved by calling:
+                                            // ((OAuthCredential)authResult.getCredential()).getSecret().
+                                            Toast.makeText(AuthActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+
+                                            user = mAuth.getCurrentUser();
+                                            String email = user.getEmail();
+                                            String username = user.getDisplayName();
+
+                                            HelperClass usr = new HelperClass();
+                                            db = FirebaseFirestore.getInstance();
+                                            usr.setUsername(username);
+                                            usr.setEmail(email);
+                                            db.collection(USER).document(email).set(usr)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(AuthActivity.this,"User added",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+
+                                            Intent intent = new Intent(AuthActivity.this,MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                            .addOnFailureListener(
+                                    new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // Handle failure.
+                                            Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                } else {
+                    // There's no pending result so you need to start the sign-in flow.
+                    // See below.
+                    mAuth
+                            .startActivityForSignInWithProvider(AuthActivity.this, provider.build())
+                            .addOnSuccessListener(
+                                    new OnSuccessListener<AuthResult>() {
+                                        @Override
+                                        public void onSuccess(AuthResult authResult) {
+                                            Toast.makeText(AuthActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(AuthActivity.this,MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                            .addOnFailureListener(
+                                    new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // Handle failure.
+                                            Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                }
             }
         });
+
+
+
+        // facebook login
+//        ivFacebookRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                LoginManager.getInstance().logInWithReadPermissions(AuthActivity.this , Arrays.asList("email", "username"));
+//                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+//                    @Override
+//                    public void onSuccess(LoginResult loginResult) {
+//                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
+//                        handleFacebookAccessToken(loginResult.getAccessToken());
+//                    }
+//                    @Override
+//                    public void onCancel() {
+//                        Log.d(TAG, "facebook:onCancel");
+//                    }
+//                    @Override
+//                    public void onError(@NonNull FacebookException error) {
+//                        Log.d(TAG, "facebook:onError", error);
+//                    }
+//                });
+//            }
+//        });
         logbtnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
