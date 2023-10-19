@@ -160,7 +160,6 @@ public class AuthActivity extends AppCompatActivity {
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
     private void handleFacebookAccessToken(AccessToken accessToken) {
         Log.d(TAG, "handleFacebookAccessToken:" + accessToken);
 
@@ -170,10 +169,11 @@ public class AuthActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-
                         user = mAuth.getCurrentUser();
                         // adding facebook credentials in firebase database
+                        //assert user != null;
                         //String email = user.getEmail();
+                        //Log.d("email","THIS IS MY EMAIL" + email);
                         String username = user.getDisplayName();
                         String email = username + "@gmail.com";
                         email.toLowerCase().trim();
