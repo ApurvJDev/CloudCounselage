@@ -36,7 +36,7 @@ public class BotResponse {
         } else if (query.contains("do i need to participate in all the activities") || query.contains("part of activity") || query.contains("activities")) {
             return "You can participate in any activities of your choice. However, each activity has its own benefit. " +
                     "The more activities that you participate in the more career/ job-ready you become.";
-        } else if (query.contains("hours of work") || query.contains("amount of work") || query.contains("woring hours")) {
+        } else if (query.contains("hours work") || query.contains("amount of work") || query.contains("working hours") || query.contains("hours of work")) {
             return "You are expected to spend 1-2 hours a week completing the professional development activities under IAC." +
                     " This will ensure continuous professional development.";
         } else if (query.contains("necessary to become a member") || query.contains("have to become a member")) {
@@ -95,11 +95,16 @@ public class BotResponse {
         } else if (query.contains("freshers") || query.contains("graduates") || query.contains("postgraduate") || query.contains("undergraduate")) {
             return "This internship program is designed for undergraduate students but if graduates and freshers" +
                     " feel it is beneficial for them then they can participate in this internship program.";
+        } else if (query.contains("update") || query.contains("telegram")) {
+            return "Please join our Telegram Channel for updates: https://t.me/+uXmD1vTLpttjN2Vl";
+        }else if (query.contains("paid") || query.contains("free") || query.contains("stipend")) {
+            return "Internship and other IAC activities are absolutely FREE.\n" +
+                    "There is no cost involved for participating in the community activities (including internships) as " +
+                    "this is a noble initiative taken up by Cloud Counselage Pvt.Ltd. in association with Gift- " +
+                    "A-Career Foundation, to help students, get job-ready, in time!";
         } else if (query.contains("internship")) {
             return "Please paste the link in your browser to signup " +
                     "for the free online internship https://www.industryacademiacommunity.com/courses/Internships";
-        } else if (query.contains("update") || query.contains("telegram")) {
-            return "Please join our Telegram Channel for updates: https://t.me/+uXmD1vTLpttjN2Vl";
         }  else if (query.contains("offer letter") || query.contains("certificate")) {
             return "The participants will get following certificates and letters:\n" +
                     "> Appointment letter within 15 days after the interns choose the field of interest\n" +
@@ -112,12 +117,7 @@ public class BotResponse {
             return "The interns have to complete the tasks as per the instructions within the deadlines";
         }  else if (query.contains("change") || query.contains("change domain") || query.contains("switch")) {
             return "Participants will get a chance to choose/change the domain and duration for internship from 14th July to 16th July.";
-        } else if (query.contains("paid") || query.contains("free") || query.contains("stipend")) {
-            return "Internship and other IAC activities are absolutely FREE.\n" +
-                    "There is no cost involved for participating in the community activities (including internships) as " +
-                    "this is a noble initiative taken up by Cloud Counselage Pvt.Ltd. in association with Gift- " +
-                    "A-Career Foundation, to help students, get job-ready, in time!";
-        } else if (query.contains("timings") || query.contains("schedule")) {
+        }  else if (query.contains("timings") || query.contains("schedule")) {
             return "For schedule of internship please refer https://shorturl.at/eSX46 The interns are expected to contribute minimum 1 to 2 hours on a daily basis.";
         } else if (query.contains("laptop")) {
             return "Yes, Laptop Required.";
