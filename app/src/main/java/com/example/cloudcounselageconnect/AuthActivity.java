@@ -1,30 +1,22 @@
 package com.example.cloudcounselageconnect;
 
 import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthCredential;
@@ -32,13 +24,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 public class AuthActivity extends AppCompatActivity {
@@ -49,7 +36,7 @@ public class AuthActivity extends AppCompatActivity {
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
     LoginButton logbtnFacebook;
-    ImageView ivFacebookRegister, ivTwitterRegister, ivMicrosoftRegister;
+    ImageView ivFacebookRegister, ivTwitterRegister;
     CallbackManager mCallbackManager;
     public static final String USER = "Users";
     @SuppressLint("MissingInflatedId")
@@ -61,7 +48,7 @@ public class AuthActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // below line gets done automatically
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        //FacebookSdk.sdkInitialize(getApplicationContext());
 
         // twitter
         OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");
@@ -76,84 +63,61 @@ public class AuthActivity extends AppCompatActivity {
         logbtnFacebook.setPermissions("email","public_profile");
 
         // twitter login
-        ivTwitterRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Task<AuthResult> pendingResultTask = mAuth.getPendingAuthResult();
-                if (pendingResultTask != null) {
-                    // There's something already here! Finish the sign-in for your user.
-                    pendingResultTask
-                            .addOnSuccessListener(
-                                    new OnSuccessListener<AuthResult>() {
-                                        @Override
-                                        public void onSuccess(AuthResult authResult) {
-                                            // User is signed in.
-                                            // IdP data available in
-                                            // authResult.getAdditionalUserInfo().getProfile().
-                                            // The OAuth access token can also be retrieved:
-                                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
-                                            // The OAuth secret can be retrieved by calling:
-                                            // ((OAuthCredential)authResult.getCredential()).getSecret().
-                                            Toast.makeText(AuthActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+        ivTwitterRegister.setOnClickListener(v -> {
+            Task<AuthResult> pendingResultTask = mAuth.getPendingAuthResult();
+            if (pendingResultTask != null) {
+                // There's something already here! Finish the sign-in for your user.
+                pendingResultTask
+                        .addOnSuccessListener(
+                                authResult -> {
+                                    // User is signed in.
+                                    // IdP data available in
+                                    // authResult.getAdditionalUserInfo().getProfile().
+                                    // The OAuth access token can also be retrieved:
+                                    // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                                    // The OAuth secret can be retrieved by calling:
+                                    // ((OAuthCredential)authResult.getCredential()).getSecret().
+                                    Toast.makeText(AuthActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
 
-                                            user = mAuth.getCurrentUser();
-                                            String email = user.getEmail();
-                                            String username = user.getDisplayName();
+                                    user = mAuth.getCurrentUser();
+                                    assert user != null;
+                                    String email = user.getEmail();
+                                    String username = user.getDisplayName();
 
-                                            HelperClass usr = new HelperClass();
-                                            db = FirebaseFirestore.getInstance();
-                                            usr.setUsername(username);
-                                            usr.setEmail(email);
-                                            db.collection(USER).document(email).set(usr)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void unused) {
-                                                            Toast.makeText(AuthActivity.this,"User added",Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
+                                    HelperClass usr = new HelperClass();
+                                    db = FirebaseFirestore.getInstance();
+                                    usr.setUsername(username);
+                                    usr.setEmail(email);
+                                    assert email != null;
+                                    db.collection(USER).document(email).set(usr)
+                                            .addOnSuccessListener(unused -> Toast.makeText(AuthActivity.this,"User added",Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show());
 
-                                            Intent intent = new Intent(AuthActivity.this,MainActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    })
-                            .addOnFailureListener(
-                                    new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            // Handle failure.
-                                            Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                } else {
-                    // There's no pending result so you need to start the sign-in flow.
-                    // See below.
-                    mAuth
-                            .startActivityForSignInWithProvider(AuthActivity.this, provider.build())
-                            .addOnSuccessListener(
-                                    new OnSuccessListener<AuthResult>() {
-                                        @Override
-                                        public void onSuccess(AuthResult authResult) {
-                                            Toast.makeText(AuthActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(AuthActivity.this,MainActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    })
-                            .addOnFailureListener(
-                                    new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            // Handle failure.
-                                            Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                }
+                                    Intent intent = new Intent(AuthActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                        .addOnFailureListener(
+                                e -> {
+                                    // Handle failure.
+                                    Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                });
+            } else {
+                // There's no pending result so you need to start the sign-in flow.
+                // See below.
+                mAuth
+                        .startActivityForSignInWithProvider(AuthActivity.this, provider.build())
+                        .addOnSuccessListener(
+                                authResult -> {
+                                    Toast.makeText(AuthActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AuthActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                        .addOnFailureListener(
+                                e -> {
+                                    // Handle failure.
+                                    Toast.makeText(AuthActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                });
             }
         });
 
@@ -267,9 +231,9 @@ public class AuthActivity extends AppCompatActivity {
                         //assert user != null;
                         //String email = user.getEmail();
                         //Log.d("email","THIS IS MY EMAIL" + email);
+                        assert user != null;
                         String username = user.getDisplayName();
                         String email = username + "@gmail.com";
-                        email.toLowerCase().trim();
 
                         HelperClass usr = new HelperClass();
                         db = FirebaseFirestore.getInstance();

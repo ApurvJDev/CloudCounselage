@@ -5,7 +5,7 @@ public class BotResponse {
 
         query = query.toLowerCase().trim();
 
-        if(query.contains("hello") || query.contains("h")) {
+        if(query.contains("hello")) {
             return "Hello! How can I assist you?";
         }  else if (query.contains("benefits") || query.contains("part of iac")) {
             return "1. Industry Exposure Workshops\n" +
