@@ -24,7 +24,6 @@ public class IntroActivity extends AppCompatActivity {
         // initialize firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-
         ViewPager2 viewPager2 = findViewById(R.id.pager);
 
         FragmentStateAdapter pagerAdapter = new ScreenSlidePagerAdapter(this);
