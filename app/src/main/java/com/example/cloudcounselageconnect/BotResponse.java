@@ -1,7 +1,63 @@
 package com.example.cloudcounselageconnect;
 
+import android.content.Context;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class BotResponse {
+
+    private static final String DEFAULT_REPLY = "I'm not sure how to respond to that.";
+    private static IntentMatcher matcher;
+
+    /**
+     * Loads the intent dataset (res/raw/chatbot_intents.json). Call once, for example in
+     * onCreate of the activity that shows the chat. If it is never called, or loading fails,
+     * the bot simply uses the original keyword rules.
+     */
+    public static void init(Context context) {
+        if (matcher != null) return;
+        try {
+            InputStream in = context.getResources().openRawResource(R.raw.chatbot_intents);
+            byte[] buffer = new byte[in.available()];
+            in.read(buffer);
+            in.close();
+            JSONObject root = new JSONObject(new String(buffer, "UTF-8"));
+
+            List<IntentMatcher.Intent> intents = new ArrayList<>();
+            JSONArray arr = root.getJSONArray("intents");
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+                JSONArray ps = o.getJSONArray("patterns");
+                List<String> patterns = new ArrayList<>();
+                for (int j = 0; j < ps.length(); j++) {
+                    patterns.add(ps.getString(j));
+                }
+                intents.add(new IntentMatcher.Intent(
+                        o.getString("intent"), o.getString("response"), patterns));
+            }
+            matcher = new IntentMatcher(intents,
+                    root.optDouble("threshold", 0.4),
+                    root.optString("fallback", DEFAULT_REPLY));
+        } catch (Exception e) {
+            matcher = null;
+        }
+    }
+
+    /** 1) closest intent from the dataset, 2) original keyword rules, 3) default reply. */
     public static String getBotReply(String query) {
+        if (matcher != null) {
+            String reply = matcher.replyOrNull(query);
+            if (reply != null) return reply;
+        }
+        return legacyReply(query);
+    }
+
+    private static String legacyReply(String query) {
 
         query = query.toLowerCase().trim();
 
