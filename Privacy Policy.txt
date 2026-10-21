@@ -3,7 +3,7 @@ Privacy Policy
 
 Effective Date: 17 Oct, 2023
 
-This Privacy Policy  is provided by Apurv Jadhav, a developer, for the application named "Cloud Counselage" ("the App"). This Policy outlines the information collection, usage, and disclosure practices associated with the App, particularly in the context of Facebook authentication, and how user information is handled. By using the App, you agree to the terms and practices described in this Policy.
+This Privacy Policy  is provided by Apurv Jadhav, a developer, for the application named "Cloud Counselage" ("the App"). This Policy outlines the information collection, usage, and disclosure practices associated with the App, particularly in the context of Google Sign-In, and how user information is handled. By using the App, you agree to the terms and practices described in this Policy.
 
 Information We Collect
 We may collect and process the following information:
@@ -12,8 +12,8 @@ We may collect and process the following information:
 
 Your name
 Your email address
-Your Facebook user ID
-Any other information you provide to us through the Facebook authentication process
+Your Google account ID
+Any other information you provide to us through the Google Sign-In process
 1.2. Usage Data:
 
 Log data, including device information, IP address, and usage statistics
@@ -21,7 +21,7 @@ Information about your interactions with the App, such as the pages you visit, f
 How We Use Your Information
 We use the collected information for the following purposes:
 
-2.1. User Authentication: We use the Facebook authentication feature to verify your identity and allow you to access the App.
+2.1. User Authentication: We use the Google Sign-In feature to verify your identity and allow you to access the App.
 
 2.2. Service Improvement: We may analyze usage patterns and feedback to improve the App's functionality and user experience.
 
