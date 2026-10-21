@@ -1,0 +1,343 @@
+{
+  "_readme": "Intent dataset for the Cloud Counselage Connect+ chatbot. Every reply is copied word for word from the original BotResponse.java. greeting and goodbye are the only new intents.",
+  "threshold": 0.4,
+  "fallback": "I'm not sure how to respond to that.",
+  "intents": [
+    {
+      "intent": "greeting",
+      "patterns": [
+        "hi",
+        "hii",
+        "hello",
+        "hey",
+        "hey there",
+        "hello there",
+        "good morning",
+        "good evening",
+        "namaste"
+      ],
+      "response": "Hello! You can ask me about fees, activities, internships, domains or certificates."
+    },
+    {
+      "intent": "fees",
+      "patterns": [
+        "fees",
+        "money",
+        "what are the fees",
+        "is there any fee",
+        "do i have to pay money",
+        "how much does it cost",
+        "any hidden charges",
+        "what is the cost"
+      ],
+      "response": "This community is created with the intent to eradicate the perpetual unemployability issue amongst the fresh graduates of India. Cloud Counselage is committed to this social cause and therefore the students can be part of this community at no cost. They do not pay any fees and there are no hidden charges for being part of this community and for availing the benefits of the programs offered through this community."
+    },
+    {
+      "intent": "activities",
+      "patterns": [
+        "do i need to participate in all the activities",
+        "part of activity",
+        "activities",
+        "is participation compulsory",
+        "do i have to join activities",
+        "which activities can i take part in",
+        "can i choose which activities to join"
+      ],
+      "response": "You can participate in any activities of your choice. However, each activity has its own benefit. The more activities that you participate in the more career/ job-ready you become."
+    },
+    {
+      "intent": "weekly_hours",
+      "patterns": [
+        "hours work",
+        "amount of work",
+        "working hours",
+        "hours of work",
+        "how many hours of work per week",
+        "how much time do i need to give",
+        "how many hours a week",
+        "time commitment per week"
+      ],
+      "response": "You are expected to spend 1-2 hours a week completing the professional development activities under IAC. This will ensure continuous professional development."
+    },
+    {
+      "intent": "membership",
+      "patterns": [
+        "necessary to become a member",
+        "iac member",
+        "have to become a member",
+        "is it necessary to become a member",
+        "do i have to become a member",
+        "how do i become a member",
+        "how to join the community"
+      ],
+      "response": "You agree to become a member of the community as soon as you sign up for the app or express interest to join the community. The benefits of the app and in turn, the community are only available to the community members. Moreover, there are no fees to become a member of the community."
+    },
+    {
+      "intent": "flexibility",
+      "patterns": [
+        "flexibility",
+        "will i get the flexibility to participate in my activities at my convenience",
+        "can i do activities at my convenience",
+        "are the timings flexible",
+        "can i participate whenever i want"
+      ],
+      "response": "Yes, having worked with the student community for the last few years, we completely understand their academic commitments and therefore offer the flexibility to participate in the activities at their convenience. With the events that are conducted at a stipulated time, the recordings are provided. During the internships, the students can work at their convenience however, will need to meet the deadlines for submission."
+    },
+    {
+      "intent": "internship_benefits",
+      "patterns": [
+        "benefits of internship",
+        "benefit of internship",
+        "has this program helped students earlier",
+        "what are the benefits of the internship",
+        "did the program help earlier students",
+        "has it helped other students"
+      ],
+      "response": "More than 90% of the community members have rated us 4 & 5 out of 5 for their overall experience of the activities. The reviews of the participant are available on our iReviews page and social media pages. The students have experienced a boost in confidence, especially during the interview, were able to channelize the interview, and have been placed in companies like Oracle, Microsoft, Capgemini, TCS, Wipro, Deloitte, etc. In terms of higher education, they were able to secure places in reputed universities in U.S., Australia, Ireland, etc."
+    },
+    {
+      "intent": "benefits",
+      "patterns": [
+        "benefits",
+        "part of iac",
+        "what are the benefits",
+        "what will i gain",
+        "what do i get from this",
+        "advantages of joining"
+      ],
+      "response": "1. Industry Exposure Workshops\n2. Career Vision\n3. Career Guidance\n4. Industry Training\n5. Internship Program\n6. Industry Visits\n7. CV & Interview Preparations\n8. Soft Skills Workshops\n9. Career Assessments\n10. Hackathons\n11. Job Placements\n12. Entrepreneurship Program"
+    },
+    {
+      "intent": "about_iac",
+      "patterns": [
+        "iac",
+        "industry academia community",
+        "what is iac",
+        "what is iac",
+        "tell me about iac",
+        "what is industry academia community",
+        "about the community"
+      ],
+      "response": "Industry-Academia Community (IAC) is a part of 'Industry-Academia Connect' initiative of Cloud Counselage Pvt. Ltd.in association with Gift-A-Career Foundation created for Industry & Academia PAN India. This community engages and supports higher education students and freshers by providing them with 360-degree professional development and career growth opportunities through Career Vision, Career Guidance, Industry & Corporate Exposure, and Hands-on experience/remote internships on live projects. All the benefits of the community can be availed from any corner of the world as it is an online community and at no cost to the members."
+    },
+    {
+      "intent": "internship_how",
+      "patterns": [
+        "how will the internship be conducted",
+        "how is the internship conducted",
+        "how does the internship work",
+        "internship format"
+      ],
+      "response": "This is a 6-12 weeks online internship, that will be conducted during the vacation (generally) and you can choose any of one domain from the ones that we offer. This is a guaranteed internship for all the students in the age group of 17-24 years who aspire to IT & Management careers. There will be no interviews or aptitude tests required for participating in this internship. To keep the internship focused and reduce the stress to the students we allow working on only one technology at a time. The interns who have successfully submitted the project, get an experience certificate. The interns who have performed exceptionally well and have delivered high-quality deliverables are provided with ‘letters of appreciation' as well and are facilitated in the ‘Industry Academia Excellence Awards’."
+    },
+    {
+      "intent": "thanks",
+      "patterns": [
+        "thank",
+        "thanks",
+        "thank you",
+        "thank you so much",
+        "thanks a lot"
+      ],
+      "response": "You're Welcome!"
+    },
+    {
+      "intent": "duration",
+      "patterns": [
+        "duration",
+        "weeks",
+        "difference",
+        "what is the duration of the internship",
+        "how long is the internship",
+        "6 weeks or 12 weeks",
+        "difference between internship durations"
+      ],
+      "response": "The difference in the internship duration is to provide you flexibility to accommodate your academic requirements, as many colleges do not allow their students to do internship while the academic sessions are in progress. Such students can contribute more hours and finish their internship early.\n\nThe problem statement for all the duration for the resp. domain will be same. The excellence awards will categorised based on the duration and projects submitted for 6 weeks will be accessed in relation to the other projects submitted for the same duration"
+    },
+    {
+      "intent": "multiple_domains",
+      "patterns": [
+        "more",
+        "multiple",
+        "more than one domain",
+        "can i choose more than one domain",
+        "can i do multiple domains",
+        "can i take two domains"
+      ],
+      "response": "We encourage focusing on one field at a time as this will help yield better results."
+    },
+    {
+      "intent": "choose_domain",
+      "patterns": [
+        "how to choose domain",
+        "how do i choose a domain",
+        "how can i select my domain"
+      ],
+      "response": "A form will be made available to the interns to choose the domain and the duration of the internship"
+    },
+    {
+      "intent": "help_guidance",
+      "patterns": [
+        "help",
+        "guidance",
+        "mentor",
+        "guided",
+        "will i get help",
+        "is there a mentor",
+        "will someone guide me",
+        "do i get guidance"
+      ],
+      "response": "Participants will get help related to understanding the problem statement and the project delivery process"
+    },
+    {
+      "intent": "selection",
+      "patterns": [
+        "selection",
+        "criteria",
+        "what is the selection process",
+        "what are the criteria",
+        "who can participate"
+      ],
+      "response": "This internship is designed for students in higher education courses and any such student aspiring for IT and Management career can participate in this internship."
+    },
+    {
+      "intent": "freshers",
+      "patterns": [
+        "freshers",
+        "graduates",
+        "postgraduate",
+        "undergraduate",
+        "can graduates join",
+        "is it for freshers",
+        "can postgraduate students apply"
+      ],
+      "response": "This internship program is designed for undergraduate students but if graduates and freshers feel it is beneficial for them then they can participate in this internship program."
+    },
+    {
+      "intent": "telegram",
+      "patterns": [
+        "update",
+        "telegram",
+        "where do i get updates",
+        "telegram channel",
+        "how to get updates"
+      ],
+      "response": "Please join our Telegram Channel for updates: https://t.me/+uXmD1vTLpttjN2Vl"
+    },
+    {
+      "intent": "paid_free",
+      "patterns": [
+        "paid",
+        "free",
+        "stipend",
+        "is it free",
+        "is the internship paid",
+        "is there a stipend"
+      ],
+      "response": "Internship and other IAC activities are absolutely FREE.\nThere is no cost involved for participating in the community activities (including internships) as this is a noble initiative taken up by Cloud Counselage Pvt.Ltd. in association with Gift- A-Career Foundation, to help students, get job-ready, in time!"
+    },
+    {
+      "intent": "certificate",
+      "patterns": [
+        "offer letter",
+        "certificate",
+        "will i get a certificate",
+        "do i get an offer letter",
+        "what certificates will i get"
+      ],
+      "response": "The participants will get following certificates and letters:\n> Appointment letter within 15 days after the interns choose the field of interest\n> Industry Training Certificate (further to completing assessment)\n> Experience Certificate from Cloud Counselage (on successful completion of internship)\n> Appreciation letter/certificate ( For top performers)\n"
+    },
+    {
+      "intent": "appointment",
+      "patterns": [
+        "appointment",
+        "letter",
+        "when will i get the appointment letter",
+        "appointment letter"
+      ],
+      "response": "We will be providing appointment letters within 15 days after the interns choose the field of interest."
+    },
+    {
+      "intent": "completion",
+      "patterns": [
+        "successful",
+        "completion",
+        "how do i complete the internship successfully",
+        "what is needed for completion"
+      ],
+      "response": "The interns have to complete the tasks as per the instructions within the deadlines"
+    },
+    {
+      "intent": "change_domain",
+      "patterns": [
+        "change",
+        "change domain",
+        "switch",
+        "can i change my domain",
+        "can i switch the domain"
+      ],
+      "response": "Participants will get a chance to choose/change the domain and duration for internship from 14th July to 16th July."
+    },
+    {
+      "intent": "schedule",
+      "patterns": [
+        "timings",
+        "schedule",
+        "what is the schedule",
+        "what are the internship timings"
+      ],
+      "response": "For schedule of internship please refer https://shorturl.at/eSX46 The interns are expected to contribute minimum 1 to 2 hours on a daily basis."
+    },
+    {
+      "intent": "laptop",
+      "patterns": [
+        "laptop",
+        "do i need a laptop",
+        "is a laptop required"
+      ],
+      "response": "Yes, Laptop Required."
+    },
+    {
+      "intent": "data",
+      "patterns": [
+        "data",
+        "data analytics",
+        "will data be provided",
+        "is data provided for analytics"
+      ],
+      "response": "Yes, the data will be provided for data analytics."
+    },
+    {
+      "intent": "domains",
+      "patterns": [
+        "domain",
+        "which domains are available",
+        "what domains do you offer",
+        "list of domains"
+      ],
+      "response": "There are 16 IT & 7 Management domains for internship:\nCloud Computing,  Digital Marketing, DevOps, Human Resources, Machine Learning, Data Analytics, Artificial Intelligence, Business Research, Web Development, Java, Python,\nBusiness Development, React JS, UI/UX, Node.js, Operations Management, Android Development, Quality Assurance, Flutter, Cyber Security, Product Management,  Project Management, Game Development, Blockchain, Full Stack Development, Marketing Management"
+    },
+    {
+      "intent": "internship",
+      "patterns": [
+        "internship",
+        "how do i sign up for the internship",
+        "internship link",
+        "how to apply for internship"
+      ],
+      "response": "Please paste the link in your browser to signup for the free online internship https://www.industryacademiacommunity.com/courses/Internships"
+    },
+    {
+      "intent": "goodbye",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you",
+        "see you later",
+        "good night",
+        "ok bye"
+      ],
+      "response": "Goodbye! Come back any time you have a question."
+    }
+  ]
+}

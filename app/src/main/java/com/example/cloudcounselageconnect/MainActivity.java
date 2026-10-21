@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        BotResponse.init(this);
 
         btnLogout = findViewById(R.id.btnLogout);
         edtSendMsg = findViewById(R.id.edtSendMsg);
