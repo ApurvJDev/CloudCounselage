@@ -11,17 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthProvider;
@@ -35,9 +34,9 @@ public class AuthActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
-    LoginButton logbtnFacebook;
-    ImageView ivFacebookRegister, ivTwitterRegister;
-    CallbackManager mCallbackManager;
+    ImageView ivGoogleRegister, ivTwitterRegister;
+    GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_GOOGLE_SIGN_IN = 9001;
     public static final String USER = "Users";
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,12 +54,14 @@ public class AuthActivity extends AppCompatActivity {
         // Localize to French.
         provider.addCustomParameter("lang", "en");
 
-        mCallbackManager = CallbackManager.Factory.create();
-        logbtnFacebook = findViewById(R.id.logbtnFacebook);
-        ivFacebookRegister = findViewById(R.id.ivFacebookRegister);
+        ivGoogleRegister = findViewById(R.id.ivGoogleRegister);
         ivTwitterRegister = findViewById(R.id.ivTwitterRegister);
-        //logbtnFacebook.setReadPermissions("email", "public_profile");
-        logbtnFacebook.setPermissions("email","public_profile");
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // twitter login
         ivTwitterRegister.setOnClickListener(v -> {
@@ -123,42 +124,10 @@ public class AuthActivity extends AppCompatActivity {
 
 
 
-        // facebook login
-//        ivFacebookRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                LoginManager.getInstance().logInWithReadPermissions(AuthActivity.this , Arrays.asList("email", "username"));
-//                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-//                    @Override
-//                    public void onSuccess(LoginResult loginResult) {
-//                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
-//                        handleFacebookAccessToken(loginResult.getAccessToken());
-//                    }
-//                    @Override
-//                    public void onCancel() {
-//                        Log.d(TAG, "facebook:onCancel");
-//                    }
-//                    @Override
-//                    public void onError(@NonNull FacebookException error) {
-//                        Log.d(TAG, "facebook:onError", error);
-//                    }
-//                });
-//            }
-//        });
-        logbtnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-            }
-            @Override
-            public void onError(@NonNull FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-            }
+
+        ivGoogleRegister.setOnClickListener(v -> {
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
         });
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager);
@@ -214,13 +183,21 @@ public class AuthActivity extends AppCompatActivity {
 //        SignupFragment signupFragment = (SignupFragment) getSupportFragmentManager().findFragmentById(R.id.SignupFragment);
 
         // Pass the activity result back to the Facebook SDK
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-    }
+        if (requestCode == RC_GOOGLE_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                handleGoogleAccessToken(account);
+            } catch (ApiException e) {
+                Log.w(TAG, "Google sign in failed", e);
+                Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show();
+            }
+        }    }
 
-    private void handleFacebookAccessToken(AccessToken accessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:" + accessToken);
+    private void handleGoogleAccessToken(GoogleSignInAccount account) {
+        Log.d(TAG, "handleGoogleAccessToken:" + account.getId());
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {

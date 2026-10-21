@@ -6,7 +6,6 @@
     <string name="enter_message">Enter Message</string>
     <string name="logout">Logout</string>
     <string name="login_twitter">Login Twitter</string>
-    <string name="facebook_register">Facebook Register</string>
     <string name="twitter_register">twitter_register</string>
     <string name="microsoft_register">microsoft register</string>
     <string name="username">Username</string>
@@ -19,7 +18,6 @@
     <string name="password_login">Password</string>
     <string name="login">Login</string>
     <string name="welcome">Welcome to Cloud Counselage Connect+</string>
-    <string name="facebook_app_id">189149910883714</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">701284a013b5aa5bef341520bdb15d8f</string>
+    <string name="google_register">Google Register</string>
+
 </resources>
