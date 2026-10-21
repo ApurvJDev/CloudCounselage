@@ -8,7 +8,7 @@ Include Necessary Information: In your email, please provide the following infor
 
 Your full name
 The email address associated with your Cloud Counselage account
-Your Facebook user ID (if applicable)
+Your Google account ID (if applicable)
 Specify Deletion Request: Clearly state that you want to delete your data from the Cloud Counselage application. You can include any additional details or preferences regarding the deletion process.
 
 Identity Verification: To protect your data and privacy, we may require you to verify your identity. This could involve confirming your identity through your registered email address or other means to ensure that we are processing the request from the actual account owner.
