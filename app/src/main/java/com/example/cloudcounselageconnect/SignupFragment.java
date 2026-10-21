@@ -13,15 +13,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.firebase.auth.GoogleAuthProvider;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -37,7 +38,6 @@ public class SignupFragment extends Fragment {
     Button signup;
 //    ImageView ivFacebookRegister, ivTwitterRegister, ivMicrosoftRegister;
     EditText edtUsername, edtSignupEmail,edtSignupPass,edtSignupConfirmPass;
-    CallbackManager mCallbackManager;
     AuthActivity authActivity;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -60,7 +60,6 @@ public class SignupFragment extends Fragment {
         user = mAuth.getCurrentUser();
         authActivity = (AuthActivity) getActivity();
         // to avoid unexpected callback manager error
-        mCallbackManager = CallbackManager.Factory.create();
 //        authActivity.passActivityResultToFragment(reque);
 
         signup = root.findViewById(R.id.btnSignup);
@@ -141,52 +140,6 @@ public class SignupFragment extends Fragment {
         });
         return root;
     }
-//    private void handleFacebookAccessToken(AccessToken accessToken) {
-//        Log.d(TAG, "handleFacebookAccessToken:" + accessToken);
-//
-//        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
-//        mAuth.signInWithCredential(credential).addOnCompleteListener(getActivity(), task -> {
-//            if (task.isSuccessful()) {
-//
-//                        // Sign in success, update UI with the signed-in user's information
-//                        Log.d(TAG, "signInWithCredential:success");
-//
-//                        user = mAuth.getCurrentUser();
-//                        // adding facebook credentials in firebase database
-//                        //String email = user.getEmail();
-//                        String username = user.getDisplayName();
-//                        String email = username + "@gmail.com";
-//
-//                        email.toLowerCase().trim();
-//
-//                        HelperClass usr = new HelperClass();
-//                        db = FirebaseFirestore.getInstance();
-//
-//                        usr.setEmail(email);
-//                        usr.setUsername(username);
-//
-//                        db.collection(USER).document(email).set(usr).
-//                                addOnSuccessListener(unused -> Toast.makeText(getActivity(), "User added!",
-//                                        Toast.LENGTH_SHORT).show()).
-//                                addOnFailureListener(e -> Toast.makeText(getActivity(), e.toString(),
-//                                        Toast.LENGTH_SHORT).show());
-//                        Log.d("Test", "Sign Up successful");
-//                        Toast.makeText(getActivity(), "Sign Up successful", Toast.LENGTH_SHORT).show();
-//
-//                        // changing activity
-//
-//                        if(user != null) {
-//                            Intent intent = new Intent(getActivity(), MainActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    } else {
-//                        // If sign in fails, display a message to the user.
-//                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-//                        Toast.makeText(getActivity(), "Authentication failed.",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//    }
 
 
     public boolean checkEmail(String email) {

@@ -29,6 +29,11 @@ android {
     }
 }
 
+configurations.all {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+}
+
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -42,8 +47,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.airbnb.android:lottie:6.1.0'
 
-    //facebook login
-    implementation 'com.facebook.android:facebook-login:latest.release'
+// Google Sign-In
+    implementation 'com.google.android.gms:play-services-auth:21.2.0'
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
 
